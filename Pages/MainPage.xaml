@@ -3,4 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuessTheAnime.MainPage">
 
+    <Grid x:Name="HD">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Text="start"
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                BorderWidth="7"
+                BorderColor="#30000000"
+                FontSize="Large"
+                FontFamily="Yourmate"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Clicked="Start_Clicked"
+                CharacterSpacing="5"/>
+
+        <Label Text="made by lirihiwa" 
+               Grid.Row="2"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               FontSize="Small"
+               FontFamily="Yourmate"
+               HorizontalOptions="Start"
+               VerticalOptions="End"
+               Padding="10"/>
+    </Grid>
 </ContentPage>

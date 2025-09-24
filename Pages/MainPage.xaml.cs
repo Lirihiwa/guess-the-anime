@@ -5,6 +5,13 @@
         public MainPage()
         {
             InitializeComponent();
+
+            PastelRainbowAnimation.StartAnimation(HD, intervalMs: 75);
+        }
+
+        private async void Start_Clicked(object sender, EventArgs e)
+        {
+            await PageTransition.PushAsync(new QuizPage());
         }
     }
 }

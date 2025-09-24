@@ -58,4 +58,16 @@
 	  <Folder Include="Resources\Images\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Pages\QuizPage.xaml.cs">
+	    <DependentUpon>QuizPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\QuizPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
