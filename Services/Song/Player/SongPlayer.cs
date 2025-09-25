@@ -16,7 +16,7 @@ namespace GuessTheAnime.Services.Song.Player
             _alertService = alertService;
         }
 
-        public async Task PlayAsync(Stream stream)
+        public void Play(Stream stream)
         {
             try
             {
