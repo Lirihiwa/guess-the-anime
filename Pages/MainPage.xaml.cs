@@ -11,7 +11,7 @@
 
         private async void Start_Clicked(object sender, EventArgs e)
         {
-            await PageTransition.PushAsync(new QuizPage());
+            await PageTransition.PushAsync("quiz");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace GuessTheAnime
+﻿using Microsoft.Extensions.Configuration;
+
+namespace GuessTheAnime
 {
     public partial class App : Application
     {

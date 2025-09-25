@@ -8,9 +8,9 @@ namespace GuessTheAnime
 {
     public static class PageTransition
     {
-        public static async Task PushAsync(Page newPage)
+        public static async Task PushAsync(string route)
         {
-            await Shell.Current.Navigation.PushAsync(newPage);
+            await Shell.Current.GoToAsync(route);
         }
 
         public static async Task PopAsync()
