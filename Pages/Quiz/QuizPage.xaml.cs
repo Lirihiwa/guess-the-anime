@@ -10,6 +10,7 @@ namespace GuessTheAnime;
 public partial class QuizPage : ContentPage
 {
     private IQuizService _quizService;
+
 	public QuizPage(IQuizService quizService)
 	{
 		InitializeComponent();
@@ -21,7 +22,6 @@ public partial class QuizPage : ContentPage
     {
         base.OnAppearing();
         PastelRainbowAnimation.StartAnimation(this);
-		UrlGenerator.GetUrlForOpening("Death_NoTE", 1);
     }
 
 	protected override void OnDisappearing()

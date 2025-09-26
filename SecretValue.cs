@@ -31,7 +31,7 @@ namespace GuessTheAnime
             }
         }
 
-        public static string GetFileServerURL()
+        public static string GetServerURL()
         {
             return GetVariableAsync(name: "SERVER_URL").Result ?? "";
         }
