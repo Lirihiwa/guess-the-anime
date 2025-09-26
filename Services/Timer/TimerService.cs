@@ -29,7 +29,7 @@ namespace GuessTheAnime.Services.Timer
 
         private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
         {
-            Timeout = _timeout - 1;
+            Timeout--;
         }
 
         private int Timeout
