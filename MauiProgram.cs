@@ -1,6 +1,7 @@
 ﻿using GuessTheAnime.Services.Alert;
 using GuessTheAnime.Services.Loader;
 using GuessTheAnime.Services.Player;
+using GuessTheAnime.Services.Quiz;
 using GuessTheAnime.Services.Timer;
 using Microsoft.Maui.LifecycleEvents;
 
@@ -28,11 +29,11 @@ namespace GuessTheAnime
                     fonts.AddFont("Yourmate.ttf", "Yourmate");
                 });
 
-            builder.Services.AddSingleton<IHttpLoader, HttpSongLoader>();
+            builder.Services.AddSingleton<IHttpLoader, HttpLoader>();
             builder.Services.AddSingleton<IPlayer, SongPlayer>();
             builder.Services.AddSingleton<IAlertService, AlertService>();
             builder.Services.AddSingleton<ITimerService, TimerService>();
-
+            builder.Services.AddSingleton<IQuizService, QuizService>();
 
             return builder.Build();
         }
