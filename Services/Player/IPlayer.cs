@@ -1,4 +1,4 @@
-﻿namespace GuessTheAnime.Services.Song.Player
+﻿namespace GuessTheAnime.Services.Player
 {
     public interface IPlayer
     {

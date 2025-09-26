@@ -1,18 +1,18 @@
 ﻿using GuessTheAnime.Services.Alert;
 using Plugin.Maui.Audio;
 
-namespace GuessTheAnime.Services.Song.Player
+namespace GuessTheAnime.Services.Player
 {
     public class SongPlayer : IPlayer
     {
         private IAudioManager _audioManager;
-        private IAudioPlayer? _player;
-
+        private IAudioPlayer _player;
         private IAlertService _alertService;
 
         public SongPlayer(IAlertService alertService)
         {
             _audioManager = AudioManager.Current;
+            _player = _audioManager.CreatePlayer();
             _alertService = alertService;
         }
 
@@ -20,9 +20,7 @@ namespace GuessTheAnime.Services.Song.Player
         {
             try
             {
-                Stop();
-
-                _player = _audioManager?.CreatePlayer(stream);
+                _player.SetSource(stream);
                 _player?.Play();
             }
             catch (Exception ex)
@@ -33,8 +31,7 @@ namespace GuessTheAnime.Services.Song.Player
 
         public void Stop()
         {
-            _player?.Stop();
-            _player?.Dispose();
+            _player.Stop();
         }
     }
 }

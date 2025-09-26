@@ -1,6 +1,6 @@
 ﻿using GuessTheAnime.Services.Alert;
-using GuessTheAnime.Services.Song.Loader;
-using GuessTheAnime.Services.Song.Player;
+using GuessTheAnime.Services.Loader;
+using GuessTheAnime.Services.Player;
 using GuessTheAnime.Services.Timer;
 using Microsoft.Maui.LifecycleEvents;
 
@@ -28,7 +28,7 @@ namespace GuessTheAnime
                     fonts.AddFont("Yourmate.ttf", "Yourmate");
                 });
 
-            builder.Services.AddSingleton<ILoader, HttpSongLoader>();
+            builder.Services.AddSingleton<IHttpLoader, HttpSongLoader>();
             builder.Services.AddSingleton<IPlayer, SongPlayer>();
             builder.Services.AddSingleton<IAlertService, AlertService>();
             builder.Services.AddSingleton<ITimerService, TimerService>();
