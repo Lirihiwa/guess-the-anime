@@ -15,6 +15,7 @@ namespace GuessTheAnime
         public static void StartAnimation(VisualElement element, int intervalMs = 50)
         {
             _timer = new System.Timers.Timer(intervalMs);
+
             _timer.Elapsed += (s, e) =>
             {
                 MainThread.BeginInvokeOnMainThread(() =>
@@ -26,12 +27,14 @@ namespace GuessTheAnime
                     element.BackgroundColor = _currentColor;
                 });
             };
+
             _timer.Start();
         }
 
-        public void StopAnimation()
+        public static void StopAnimation()
         {
             _timer?.Stop();
+            _timer?.Dispose();
         }
     }
 }
