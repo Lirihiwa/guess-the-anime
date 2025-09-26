@@ -5,13 +5,23 @@
         public MainPage()
         {
             InitializeComponent();
-
-            PastelRainbowAnimation.StartAnimation(HD, intervalMs: 75);
         }
 
         private async void Start_Clicked(object sender, EventArgs e)
         {
             await PageTransition.PushAsync("quiz");
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            PastelRainbowAnimation.StartAnimation(this);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            PastelRainbowAnimation.StopAnimation();
         }
     }
 }
