@@ -13,14 +13,14 @@ namespace GuessTheAnime
                 using var stream = await FileSystem.OpenAppPackageFileAsync(pathToEnvFile);
                 using var reader = new StreamReader(stream);
 
-                string? line;
+                string? line = await reader.ReadLineAsync();
 
-                while ((line = await reader.ReadLineAsync()) != null)
+                while (line != null)
                 {
-                    var parts = line.Split(separator: '=',
-                                           options: StringSplitOptions.RemoveEmptyEntries);
+                    var parts = line.Split('=', 2);
 
-                    if (parts.Length == 2 && parts[0] == name) return parts[1];
+                    if (parts.Length == 2 && parts[0] == name)
+                        return parts[1];
                 }
 
                 return null;
@@ -31,9 +31,10 @@ namespace GuessTheAnime
             }
         }
 
-        public static string GetServerURL()
+        public static async Task<string> GetServerURL()
         {
-            return GetVariableAsync(name: "SERVER_URL").Result ?? "";
+            var url = await GetVariableAsync(name: "SERVER_URL");
+            return  url ?? "";
         }
     }
 }

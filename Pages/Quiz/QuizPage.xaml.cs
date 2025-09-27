@@ -11,17 +11,21 @@ public partial class QuizPage : ContentPage
 {
     private IQuizService _quizService;
 
-	public QuizPage(IQuizService quizService)
+    public QuizPage(IQuizService quizService, IHttpLoader httpLoader, IPlayer songPlayer)
 	{
 		InitializeComponent();
 
         _quizService = quizService;
+
+		_quizService.TimeToGuess += OnTimeToGuess;
+		_quizService.TimeChanged += OnTimeChanged;
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        PastelRainbowAnimation.StartAnimation(this);
+		PastelRainbowAnimation.StartAnimation(this);
+		_quizService.Initialize();
     }
 
 	protected override void OnDisappearing()
@@ -30,13 +34,16 @@ public partial class QuizPage : ContentPage
 		PastelRainbowAnimation.StopAnimation();
 	}
 
-	//private async void r(object sender, EventArgs e)
-	//{
-	//	var path = Path.Combine(path1: DotEnv.GetFileServerURL(),
-	//							path2: "Black Bullet - OP 1.mp3");
+	private async void OnTimeToGuess()
+	{
+		
+    }
 
-	//	var stream = await _httpSongLoader.LoadAsStreamAsync(path);
-
-	//	await _songPlayer.PlayAsync(stream);
-	//}
+	private void OnTimeChanged(int second)
+	{
+		MainThread.BeginInvokeOnMainThread(() =>
+		{
+			Sec.Text = second.ToString();
+		});
+	}
 }

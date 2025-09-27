@@ -2,37 +2,37 @@
 {
     public interface IQuizService
     {
-        void Start();
+        void Initialize();
         void Stop();
 
         /// <summary>
         /// Вызывается если оставшееся время изменилось
         /// </summary>
-        event Action<int> OnTimeChanged;
+        event Action<int> TimeChanged;
 
         /// <summary>
         /// Вызывается при смене раунда
         /// </summary>
-        event Action<int> OnRoundChanged;
+        event Action<int> RoundChanged;
 
         /// <summary>
         /// Вызывается когда время прослушивания вышло
         /// </summary>
-        event Action OnTimeToGuess;
+        event Action TimeToGuess;
 
         /// <summary>
         /// Вызывается когда игрок сделал выбор
         /// </summary>
-        event Action OnChoice;
+        event Action Choice;
 
         /// <summary>
         /// Вызывается при создании нового раунда
         /// </summary>
-        event Action OnNextRoundRequired;
+        event Action NextRoundRequired;
 
         /// <summary>
         /// Вызывается когда опенинг готов в воспроизведению
         /// </summary>
-        event Action OnOpeningFullLoaded;
+        event Action<Stream> OpeningFullLoaded;
     }
 }

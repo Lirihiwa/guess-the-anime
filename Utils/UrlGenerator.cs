@@ -10,16 +10,23 @@ namespace GuessTheAnime.Utils
     {
         public static string GetUrlForOpening(string animeName, int sequenceNumber)
         {
-            var openingName = String.Format("{0}_{1}.mp3", animeName, sequenceNumber).ToLower();
+            var splitName = animeName.Split(' ');
+            string animeFormatName = "";
 
-            return Path.Combine(path1: SecretValue.GetServerURL(),
-                                path2: "openings",
-                                path3: openingName);
+            foreach (var item in splitName)
+            {
+                animeFormatName += $"{item}_";
+            }
+
+            var openingName = (animeFormatName + sequenceNumber + ".mp3").ToLower();
+
+            return $"{SecretValue.GetServerURL().Result}/openings/{openingName}";
         }
 
-        public static string GetUrlForAnimeList()
+        public static async Task<string> GetUrlForAnimeList()
         {
-            return Path.Combine(path1: SecretValue.GetServerURL(), path2: "list.txt");
+            var serverUrl = await SecretValue.GetServerURL();
+            return Path.Combine(path1: serverUrl, path2: "list.txt");
         }
     }
 }

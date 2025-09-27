@@ -2,6 +2,8 @@
 {
     public interface IHttpLoader
     {
-        Task<Stream> LoadAsStreamAsync(string url);
+        Task LoadAsStreamAsync(string url);
+
+        event Action<Stream>? Loaded;
     }
 }

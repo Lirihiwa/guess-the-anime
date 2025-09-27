@@ -7,32 +7,45 @@ namespace GuessTheAnime.Services.Quiz
 {
     public class QuizService : IQuizService
     {
+        private ITimerService _timer;
         private IHttpLoader _httpSongLoader;
         private IPlayer _songPlayer;
-        private ITimerService _timer;
 
         public QuizService(IHttpLoader httpLoader, IPlayer songPlayer, ITimerService timer)
         {
+            _timer = timer;
             _httpSongLoader = httpLoader;
             _songPlayer = songPlayer;
-            _timer = timer;
 
-            _timer.TimeIsChanged += OnTimeChanged;
-            _timer.TimesUp += OnTimesUp;
-
-            //_timer.Start(5);
+            OpeningFullLoaded += OnOpeningFullLoaded;
         }
 
-        public event Action<int>? OnTimeChanged;
-        public event Action<int>? OnRoundChanged;
-        public event Action? OnTimeToGuess;
-        public event Action? OnChoice;
-        public event Action? OnNextRoundRequired;
-        public event Action? OnOpeningFullLoaded;
-
-        public void Start()
+        public event Action<int>? TimeChanged
         {
-            throw new NotImplementedException();
+            add => _timer.TimeIsChanged += value;
+            remove => _timer.TimeIsChanged -= value;
+        }
+
+        public event Action<int>? RoundChanged;
+
+        public event Action? TimeToGuess
+        {
+            add => _timer.TimesUp += value;
+            remove => _timer.TimesUp -= value;
+        }
+
+        public event Action? Choice;
+        public event Action? NextRoundRequired;
+        public event Action<Stream>? OpeningFullLoaded
+        {
+            add => _httpSongLoader.Loaded += value;
+            remove => _httpSongLoader.Loaded -= value;
+        }
+
+        public async void Initialize()
+        {
+            _timer.Start(5);
+            await _httpSongLoader.LoadAsStreamAsync(UrlGenerator.GetUrlForOpening("BlaCk BuLLet", 1));
         }
 
         public void Stop()
@@ -40,8 +53,9 @@ namespace GuessTheAnime.Services.Quiz
             throw new NotImplementedException();
         }
 
-        private void OnTimerChanged(int seconds) => OnTimeChanged?.Invoke(seconds);
-
-        private void OnTimesUp() => OnTimeToGuess?.Invoke();
+        private void OnOpeningFullLoaded(Stream stream)
+        {
+            _songPlayer.Play(stream);
+        }
     }
 }
